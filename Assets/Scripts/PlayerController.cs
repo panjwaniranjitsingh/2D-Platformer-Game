@@ -7,19 +7,20 @@ public class PlayerController : MonoBehaviour
 {
     public Animator animator;
     private BoxCollider2D playerCollider;
-    public float initialYoffset, initialYsize, crouchYoffset = 0.07785285f, crouchYsize= 1.278029f;
+    public float initialYoffset, initialYsize, crouchYoffset = 0.59f, crouchYsize= 1.33f;
     public float speed;
     private Rigidbody2D rigbod2d;
     public float jump;
+    public bool onGround;
     // Start is called before the first frame update
     void Start()
     {
         playerCollider = gameObject.GetComponent<BoxCollider2D>();
-        initialYoffset=playerCollider.offset.y; 
-        initialYsize = playerCollider.size.y;
         rigbod2d = gameObject.GetComponent<Rigidbody2D>();
+        initialYoffset = playerCollider.offset.y;
+        initialYsize = playerCollider.size.y;
     }
-
+    
     // Update is called once per frame
     void Update()
     {
@@ -40,10 +41,25 @@ public class PlayerController : MonoBehaviour
         transform.position = position;
 
         //Move player vertically
-        if(vertical>0)
+        if(vertical>0 && onGround)
         {
+            onGround = false;
+            Debug.Log("Move vertically");
             rigbod2d.AddForce(new Vector2(0f, jump), ForceMode2D.Force);
         }
+
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        onGround = true;
+        Debug.Log("OnCollisionEnter2D" + collision.collider.name);
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        onGround = false;
+        Debug.Log("OnCollisionExit2D");
     }
 
     private void PlayerMovementAnimation(float horizontal,float vetical)
