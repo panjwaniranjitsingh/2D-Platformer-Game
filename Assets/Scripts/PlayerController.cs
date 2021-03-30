@@ -12,6 +12,11 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rigbod2d;
     public float jump;
     public bool onGround;
+    public Vector3 playerStartPosition;
+    void Awake()
+    {
+        playerStartPosition = gameObject.transform.position;
+    }
     // Start is called before the first frame update
     void Start()
     {

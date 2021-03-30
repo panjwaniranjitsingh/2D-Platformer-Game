@@ -11,6 +11,7 @@ public class LevelOverController : MonoBehaviour
         {
             //Level Over Load Next Level
             Debug.Log("OnTriggerEnter2D with " + collision.name);
+            Debug.Log("Level Over");
            // Debug.Log(SceneManager.GetActiveScene().buildIndex);
             if(SceneManager.GetActiveScene().buildIndex== 1)
                 SceneManager.LoadScene(0);
