@@ -1395,6 +1395,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 776936285, guid: d536eee40a820cd44ab754bb31a97ef3, type: 3}
+      propertyPath: m_Size.y
+      value: 2.0460322
+      objectReference: {fileID: 0}
+    - target: {fileID: 776936285, guid: d536eee40a820cd44ab754bb31a97ef3, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.9736619
+      objectReference: {fileID: 0}
+    - target: {fileID: 776936290, guid: d536eee40a820cd44ab754bb31a97ef3, type: 3}
+      propertyPath: crouchYsize
+      value: 1.270477
+      objectReference: {fileID: 0}
+    - target: {fileID: 776936290, guid: d536eee40a820cd44ab754bb31a97ef3, type: 3}
+      propertyPath: crouchYoffset
+      value: 0.5858845
+      objectReference: {fileID: 0}
     - target: {fileID: 776936290, guid: d536eee40a820cd44ab754bb31a97ef3, type: 3}
       propertyPath: scoreController
       value: 
@@ -1412,12 +1428,12 @@ PrefabInstance:
     - target: {fileID: 7394480248366112119, guid: d536eee40a820cd44ab754bb31a97ef3,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.2
+      value: -4.35
       objectReference: {fileID: 0}
     - target: {fileID: 7394480248366112119, guid: d536eee40a820cd44ab754bb31a97ef3,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.6
+      value: -0.34
       objectReference: {fileID: 0}
     - target: {fileID: 7394480248366112119, guid: d536eee40a820cd44ab754bb31a97ef3,
         type: 3}

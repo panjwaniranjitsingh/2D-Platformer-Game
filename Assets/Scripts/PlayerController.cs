@@ -1,42 +1,41 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public Animator animator;
-    private BoxCollider2D playerCollider;
-    public float initialYoffset, initialYsize, crouchYoffset = 0.59f, crouchYsize= 1.33f;
-    public float speed;
-    private Rigidbody2D rigbod2d;
-    public float jump;
-    public bool onGround;
-    public Vector3 playerStartPosition;
-
-    public ScoreController scoreController;
+    [SerializeField] Animator animator;
+    private BoxCollider2D m_playerCollider;
+    [SerializeField] float initialYoffset, initialYsize, crouchYoffset, crouchYsize;
+    [SerializeField] float initialXoffset, initialXsize, crouchXoffset, crouchXsize;
+    [SerializeField] float speed;
+    private Rigidbody2D m_rigbod2d;
+    [SerializeField] float jump;
+    [SerializeField] bool onGround;
+    public Vector3 playerStartPosition;//public since using in PlayerDeathController script
+    const int SCORE_ADD = 25;
+    [SerializeField] ScoreController scoreController;
 
     public void KeyPicked()
     {
         //Player Pcked the key increase score
         Debug.Log("Reached KeyPicked function");
-        scoreController.IncreaseScore(25);
+        scoreController.IncreaseScore(SCORE_ADD);
     }
 
     // Start is called before the first frame update
     private void Awake()
     {
-        playerCollider = gameObject.GetComponent<BoxCollider2D>();
-        rigbod2d = gameObject.GetComponent<Rigidbody2D>();
-        initialYoffset = playerCollider.offset.y;
-        initialYsize = playerCollider.size.y;
-        playerStartPosition = gameObject.transform.position;
+        m_playerCollider = GetComponent<BoxCollider2D>();
+        m_rigbod2d = GetComponent<Rigidbody2D>();
+        initialYoffset = m_playerCollider.offset.y;
+        initialYsize = m_playerCollider.size.y;
+        initialXoffset = m_playerCollider.offset.x;
+        initialXsize = m_playerCollider.size.x;
+        playerStartPosition = transform.position;
     }
     
     // Update is called once per frame
     void Update()
     {
-
         float horizontal = Input.GetAxisRaw("Horizontal");
         //Debug.Log("Player Speed is:"+horizontal);
         float vertical = Input.GetAxisRaw("Vertical");
@@ -57,7 +56,7 @@ public class PlayerController : MonoBehaviour
         {
             onGround = false;
            // Debug.Log("Move vertically");
-            rigbod2d.AddForce(new Vector2(0f, jump), ForceMode2D.Force);
+            m_rigbod2d.AddForce(new Vector2(0f, jump), ForceMode2D.Force);
         }
 
     }
@@ -80,41 +79,44 @@ public class PlayerController : MonoBehaviour
         //  Debug.Log("OnCollisionExit2D");
     }
 
-    private void PlayerMovementAnimation(float horizontal,float vetical)
+    private void PlayerMovementAnimation(float horizontal,float vertical)
     {
         animator.SetFloat("Speed", Mathf.Abs(horizontal));
         Vector3 scale = transform.localScale;
-        if (horizontal < 0)
-        {
-            scale.x = -1f * Mathf.Abs(scale.x);
+         if (horizontal < 0)
+         {
+             scale.x = -1f * Mathf.Abs(scale.x);
+         }
+         else if (horizontal > 0)
+         {
+             scale.x = Mathf.Abs(scale.x);
+         }
+        // scale.x = horizontal < 0 ? -1f * Mathf.Abs(scale.x) : Mathf.Abs(scale.x);
+        //Not using since spriterenderer is used for display face direction of player  
 
-        }
-        else if (horizontal > 0)
-        {
-            scale.x = Mathf.Abs(scale.x);
-        }
         transform.localScale = scale;
 
-        if (Input.GetKey(KeyCode.LeftControl))
+        if (Input.GetKeyDown(KeyCode.LeftControl))
         {
             animator.SetBool("isCrouch", true);
-            playerCollider.offset = new Vector2(playerCollider.offset.x, crouchYoffset);
-            playerCollider.size = new Vector2(playerCollider.size.x, crouchYsize);
+            m_playerCollider.offset = new Vector2(crouchXoffset, crouchYoffset);
+            m_playerCollider.size = new Vector2(crouchXsize, crouchYsize);
         }
-        else
+        else if (Input.GetKeyUp(KeyCode.LeftControl))
         {
             animator.SetBool("isCrouch", false);
-            playerCollider.offset = new Vector2(playerCollider.offset.x, initialYoffset);
-            playerCollider.size = new Vector2(playerCollider.size.x, initialYsize);
+            m_playerCollider.offset = new Vector2(initialXoffset, initialYoffset);
+            m_playerCollider.size = new Vector2(initialXsize, initialYsize);
         }
-        
-        if (vetical > 0)
+
+        /*if (vertical > 0)
         {
             animator.SetBool("Jump", true);
         }
         else
         {
             animator.SetBool("Jump", false);
-        }
+        }*/
+        animator.SetBool("Jump",vertical>0);
     }
 }
