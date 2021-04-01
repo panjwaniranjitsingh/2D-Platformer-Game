@@ -256,3 +256,4 @@ MonoBehaviour:
   jump: 250
   onGround: 1
   playerStartPosition: {x: 0, y: 0, z: 0}
+  scoreController: {fileID: 0}

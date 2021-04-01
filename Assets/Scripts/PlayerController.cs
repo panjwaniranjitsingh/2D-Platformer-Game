@@ -13,17 +13,24 @@ public class PlayerController : MonoBehaviour
     public float jump;
     public bool onGround;
     public Vector3 playerStartPosition;
-    void Awake()
+
+    public ScoreController scoreController;
+
+    public void KeyPicked()
     {
-        playerStartPosition = gameObject.transform.position;
+        //Player Pcked the key increase score
+        Debug.Log("Reached KeyPicked function");
+        scoreController.IncreaseScore(25);
     }
+
     // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         playerCollider = gameObject.GetComponent<BoxCollider2D>();
         rigbod2d = gameObject.GetComponent<Rigidbody2D>();
         initialYoffset = playerCollider.offset.y;
         initialYsize = playerCollider.size.y;
+        playerStartPosition = gameObject.transform.position;
     }
     
     // Update is called once per frame
@@ -49,7 +56,7 @@ public class PlayerController : MonoBehaviour
         if(vertical>0 && onGround)
         {
             onGround = false;
-            Debug.Log("Move vertically");
+           // Debug.Log("Move vertically");
             rigbod2d.AddForce(new Vector2(0f, jump), ForceMode2D.Force);
         }
 
@@ -57,14 +64,20 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        onGround = true;
-        Debug.Log("OnCollisionEnter2D" + collision.collider.name);
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            onGround = true;
+        }
+      //  Debug.Log("OnCollisionEnter2D" + collision.collider.name);
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        onGround = false;
-        Debug.Log("OnCollisionExit2D");
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            onGround = false;
+        }
+        //  Debug.Log("OnCollisionExit2D");
     }
 
     private void PlayerMovementAnimation(float horizontal,float vetical)
