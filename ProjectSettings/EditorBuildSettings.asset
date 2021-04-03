@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Start.unity
     guid: 86dff5cf7ff5558409d418902ae2f106
   - enabled: 1
-    path: Assets/Scenes/Next Level.unity
+    path: Assets/Scenes/Next.unity
     guid: 321e0a99c0d0bfe49ab4f2f44edd08a9
   m_configObjects: {}

@@ -3,13 +3,12 @@ using TMPro;
 
 public class ScoreController : MonoBehaviour
 {
-    private TextMeshProUGUI scoreText;
-
+    [SerializeField] private TextMeshProUGUI scoreText;
     private int score = 0;
-
+    const string SCORE ="Score: ";
     private void Awake()
     {
-        scoreText = GetComponent<TextMeshProUGUI>();
+      // scoreText = GetComponent<TextMeshProUGUI>();
     }
 
     private void Start()
@@ -25,6 +24,6 @@ public class ScoreController : MonoBehaviour
 
     private void RefreshUI()
     {
-        scoreText.text = "Score: " + score;
+        scoreText.text = SCORE + score;
     }
 }

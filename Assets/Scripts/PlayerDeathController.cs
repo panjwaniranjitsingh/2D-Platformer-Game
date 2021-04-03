@@ -8,11 +8,8 @@ public class PlayerDeathController : MonoBehaviour
         {
             //Player Dies so Restart Level
             Debug.Log("Player Die as no platform");
-            //Restarting Level using LoadScene
-            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-
-            //Restarting Level using transform
-            collision.gameObject.transform.position=collision.gameObject.GetComponent<PlayerController>().playerStartPosition;
+            PlayerController playerController = collision.gameObject.GetComponent<PlayerController>();
+            playerController.PlayerDie();
         }
     }
 }
