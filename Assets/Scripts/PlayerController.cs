@@ -145,10 +145,10 @@ public class PlayerController : MonoBehaviour
     {
         LevelText.text = "Level "+SceneManager.GetActiveScene().name + " Restarted";
         //Restarting Level using LoadScene
-           // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+           SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
            //Not using LoadScene as Restart Level cannot be shown on text
         //Restarting Level using transform
-        transform.position = playerStartPosition;
+       // transform.position = playerStartPosition;
     }
 }
        
