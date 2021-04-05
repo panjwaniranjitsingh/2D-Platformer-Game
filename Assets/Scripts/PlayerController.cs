@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     const string SPEED = "Speed";
     const string ISCROUCH = "isCrouch";
     const string JUMP = "Jump";
+    private bool m_playerAlive = true;
 
     public void KeyPicked()
     {
@@ -50,9 +51,12 @@ public class PlayerController : MonoBehaviour
         //Debug.Log("Player Speed is:"+horizontal);
         float vertical = Input.GetAxisRaw(VERTICAL);
         //Debug.Log("Player can jump : "+vertical);
-        PlayerHorizontalMovement(horizontal);
-        PlayerJump(vertical);
-        PlayerCrouch();
+        if (m_playerAlive)
+        {
+            PlayerHorizontalMovement(horizontal);
+            PlayerJump(vertical);
+            PlayerCrouch();
+        }
         
     }
 
@@ -143,12 +147,21 @@ public class PlayerController : MonoBehaviour
 
     public void PlayerDie()
     {
-        LevelText.text = "Level "+SceneManager.GetActiveScene().name + " Restarted";
+        m_playerAlive = false;
+        animator.SetBool("PlayerDies", true);
+       // LevelText.text = "Level "+SceneManager.GetActiveScene().name + " Restarted";
+        
         //Restarting Level using LoadScene
-           SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Invoke("ReloadScene",5);
+        //USING INVOKE FUNTION FOR 5 SEC DELAY   
            //Not using LoadScene as Restart Level cannot be shown on text
         //Restarting Level using transform
        // transform.position = playerStartPosition;
+    }
+
+    private void ReloadScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
        
