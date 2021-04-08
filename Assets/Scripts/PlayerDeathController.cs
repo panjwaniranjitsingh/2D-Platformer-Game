@@ -10,6 +10,7 @@ public class PlayerDeathController : MonoBehaviour
             //Player Dies so Restart Level
             Debug.Log("Player Die as no platform");
             PlayerController playerController = collision.gameObject.GetComponent<PlayerController>();
+            playerController.NoPlatform();
             playerController.PlayerDie();
         }
         if (collision.gameObject.CompareTag(ENEMY))

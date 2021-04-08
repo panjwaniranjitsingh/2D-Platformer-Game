@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using System;
 
 public class PlayerController : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] ScoreController scoreController;
     [SerializeField] GameOverController gameOverController;
     [SerializeField] private TextMeshProUGUI LevelText;
+    [SerializeField] private int noOfLives;
+    [SerializeField] private GameObject PlayerHeart1, PlayerHeart2, PlayerHeart3;
     const int SCORE_ADD = 25;
     const string HORIZONTAL = "Horizontal";
     const string VERTICAL = "Vertical";
@@ -42,6 +45,7 @@ public class PlayerController : MonoBehaviour
         initialXsize = m_playerCollider.size.x;
         playerStartPosition = transform.position;
         LevelText.text = SceneManager.GetActiveScene().name + " Level";
+        noOfLives = 3;
     }
 
 
@@ -148,16 +152,25 @@ public class PlayerController : MonoBehaviour
 
     public void PlayerDie()
     {
-        m_playerAlive = false;
-        animator.SetBool("PlayerDies", true);
-        // LevelText.text = "Level "+SceneManager.GetActiveScene().name + " Restarted";
-        
-        //Restarting Level using LoadScene
-        Invoke("CallPlayerDied", 3);
-        //USING INVOKE FUNTION FOR 3 SEC DELAY   
-           //Not using LoadScene as Restart Level cannot be shown on text
-        //Restarting Level using transform
-       // transform.position = playerStartPosition;
+        noOfLives--;
+        if (noOfLives == 2)
+            Destroy(PlayerHeart1);
+        if (noOfLives == 1)
+            Destroy(PlayerHeart2);
+        if (noOfLives <= 0)
+        {
+            Destroy(PlayerHeart3);
+            m_playerAlive = false;
+            animator.SetBool("PlayerDies", true);
+            // LevelText.text = "Level "+SceneManager.GetActiveScene().name + " Restarted";
+
+            //Restarting Level using LoadScene
+            Invoke("CallPlayerDied", 3);
+            //USING INVOKE FUNTION FOR 3 SEC DELAY   
+            //Not using LoadScene as Restart Level cannot be shown on text
+            //Restarting Level using transform
+            // transform.position = playerStartPosition;
+        }
     }
     private void CallPlayerDied()
     {
@@ -166,5 +179,14 @@ public class PlayerController : MonoBehaviour
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    public void NoPlatform()
+    {
+        noOfLives = 1;
+        if(PlayerHeart1!=null)
+            Destroy(PlayerHeart1);
+        if (PlayerHeart2!=null)
+            Destroy(PlayerHeart2);
+    }
+
 }
-       
+
