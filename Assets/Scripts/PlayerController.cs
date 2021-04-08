@@ -140,8 +140,8 @@ public class PlayerController : MonoBehaviour
     {
         // Debug.Log(SceneManager.GetActiveScene().buildIndex);
         if (SceneManager.GetActiveScene().buildIndex == 1)
-            SceneManager.LoadScene(0);
-        if (SceneManager.GetActiveScene().buildIndex == 0)
+            SceneManager.LoadScene(2);
+        if (SceneManager.GetActiveScene().buildIndex == 2)
             SceneManager.LoadScene(1);
     }
 
