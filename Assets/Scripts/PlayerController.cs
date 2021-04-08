@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
-using TMPro;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] bool onGround;
     [SerializeField] Vector3 playerStartPosition;
     [SerializeField] ScoreController scoreController;
+    [SerializeField] GameOverController gameOverController;
     [SerializeField] private TextMeshProUGUI LevelText;
     const int SCORE_ADD = 25;
     const string HORIZONTAL = "Horizontal";
@@ -149,19 +150,21 @@ public class PlayerController : MonoBehaviour
     {
         m_playerAlive = false;
         animator.SetBool("PlayerDies", true);
-       // LevelText.text = "Level "+SceneManager.GetActiveScene().name + " Restarted";
+        // LevelText.text = "Level "+SceneManager.GetActiveScene().name + " Restarted";
         
         //Restarting Level using LoadScene
-        Invoke("ReloadScene",5);
-        //USING INVOKE FUNTION FOR 5 SEC DELAY   
+        Invoke("CallPlayerDied", 3);
+        //USING INVOKE FUNTION FOR 3 SEC DELAY   
            //Not using LoadScene as Restart Level cannot be shown on text
         //Restarting Level using transform
        // transform.position = playerStartPosition;
     }
-
-    private void ReloadScene()
+    private void CallPlayerDied()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        gameOverController.PlayerDied();
+        this.enabled = false;
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+
 }
        

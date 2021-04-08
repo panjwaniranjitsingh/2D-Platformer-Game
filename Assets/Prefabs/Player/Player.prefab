@@ -257,8 +257,9 @@ MonoBehaviour:
   crouchXoffset: -0.02119997
   crouchXsize: 0.435748
   speed: 8
-  jump: 250
+  jump: 300
   onGround: 1
   playerStartPosition: {x: 0, y: 0, z: 0}
   scoreController: {fileID: 0}
+  gameOverController: {fileID: 0}
   LevelText: {fileID: 0}
