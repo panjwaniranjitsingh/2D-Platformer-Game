@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
         initialXoffset = m_playerCollider.offset.x;
         initialXsize = m_playerCollider.size.x;
         playerStartPosition = transform.position;
-        LevelText.text = SceneManager.GetActiveScene().name + " Level";
+        LevelText.text = SceneManager.GetActiveScene().name;
         noOfLives = 3;
     }
 
@@ -147,6 +147,10 @@ public class PlayerController : MonoBehaviour
         if (SceneManager.GetActiveScene().buildIndex == 1)
             SceneManager.LoadScene(2);
         if (SceneManager.GetActiveScene().buildIndex == 2)
+            SceneManager.LoadScene(3);
+        if (SceneManager.GetActiveScene().buildIndex == 3)
+            SceneManager.LoadScene(4);
+        if (SceneManager.GetActiveScene().buildIndex == 4)
             SceneManager.LoadScene(1);
     }
 
