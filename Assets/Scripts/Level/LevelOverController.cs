@@ -9,8 +9,10 @@ public class LevelOverController : MonoBehaviour
             //Level Over Load Next Level
             Debug.Log("OnTriggerEnter2D with " + collision.name);
             Debug.Log("Level Over");
+            LevelManager.Instance.MarkCurrentLevelComplete();
             PlayerController playerController=collision.gameObject.GetComponent<PlayerController>();
             playerController.LevelComplete();
+
         }
     }
 }
