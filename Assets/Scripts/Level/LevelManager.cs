@@ -9,7 +9,7 @@ public class LevelManager : MonoBehaviour
 
     //public string Level1,Lobby;
 
-    public string[] Levels;
+    [SerializeField] string[] Levels;
 
     private void Awake()
     {
@@ -26,14 +26,20 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
+        //Unlocking Lobby
         if(GetLevelStatus(Levels[0])== LevelStatus.Locked)
         {
             SetLevelStatus(Levels[0], LevelStatus.Unlocked);
         }
+        //Unlocking Level 1
         if (GetLevelStatus(Levels[1]) == LevelStatus.Locked)
         {
             SetLevelStatus(Levels[1], LevelStatus.Unlocked);
         }
+
+        //Locking other levels
+        for(int i=2;i<Levels.Length;i++)
+            SetLevelStatus(Levels[i], LevelStatus.Locked);
     }
 
     public void MarkCurrentLevelComplete()

@@ -264,6 +264,7 @@ MonoBehaviour:
   gameOverController: {fileID: 0}
   LevelText: {fileID: 0}
   noOfLives: 0
-  PlayerHeart1: {fileID: 0}
-  PlayerHeart2: {fileID: 0}
-  PlayerHeart3: {fileID: 0}
+  PlayerHearts:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

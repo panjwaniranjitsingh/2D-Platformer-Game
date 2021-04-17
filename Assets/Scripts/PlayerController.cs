@@ -18,8 +18,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameOverController gameOverController;
     [SerializeField] private TextMeshProUGUI LevelText;
     [SerializeField] private int noOfLives;
-    [SerializeField] private GameObject PlayerHeart1, PlayerHeart2, PlayerHeart3;
+    [SerializeField] private GameObject[] PlayerHearts;
     const int SCORE_ADD = 25;
+    const int PLAYERLIVES = 3;
     const string HORIZONTAL = "Horizontal";
     const string VERTICAL = "Vertical";
     const string GROUND = "Ground";
@@ -27,6 +28,7 @@ public class PlayerController : MonoBehaviour
     const string ISCROUCH = "isCrouch";
     const string JUMP = "Jump";
     private bool m_playerAlive = true;
+    public bool LevelCompleted = false;
 
     public void KeyPicked()
     {
@@ -45,7 +47,7 @@ public class PlayerController : MonoBehaviour
         initialXsize = m_playerCollider.size.x;
         playerStartPosition = transform.position;
         LevelText.text = SceneManager.GetActiveScene().name;
-        noOfLives = 3;
+        noOfLives = PLAYERLIVES;
     }
 
 
@@ -143,40 +145,46 @@ public class PlayerController : MonoBehaviour
 
     public void LevelComplete()
     {
+        if (!LevelCompleted)
+            return;
         // Debug.Log(SceneManager.GetActiveScene().buildIndex);
-        if (SceneManager.GetActiveScene().buildIndex == 1)
-            SceneManager.LoadScene(2);
-        if (SceneManager.GetActiveScene().buildIndex == 2)
-            SceneManager.LoadScene(3);
-        if (SceneManager.GetActiveScene().buildIndex == 3)
-            SceneManager.LoadScene(4);
-        if (SceneManager.GetActiveScene().buildIndex == 4)
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        if (currentSceneIndex < SceneManager.sceneCountInBuildSettings-1)
+            SceneManager.LoadScene(currentSceneIndex+1);
+        else if (currentSceneIndex == SceneManager.sceneCountInBuildSettings - 1)
             SceneManager.LoadScene(1);
+    }
+
+    public void ShowLevelComplete()
+    {
+        if (!LevelCompleted)
+            return;
+        //Bonus Feature
+        LevelText.text = "New Level Complete";
+        this.enabled = false;
     }
 
     public void PlayerDie()
     {
         noOfLives--;
-        if (noOfLives == 2)
-            Destroy(PlayerHeart1);
-        if (noOfLives == 1)
-            Destroy(PlayerHeart2);
-        if (noOfLives <= 0)
+        if (noOfLives < PLAYERLIVES)
+            if (PlayerHearts[noOfLives].activeSelf)
+                PlayerHearts[noOfLives].SetActive(false); 
+        if (noOfLives == 0)
         {
-            Destroy(PlayerHeart3);
             m_playerAlive = false;
             animator.SetBool("PlayerDies", true);
             // LevelText.text = "Level "+SceneManager.GetActiveScene().name + " Restarted";
 
             //Restarting Level using LoadScene
-            Invoke("CallPlayerDied", 3);
+            //Invoke("CallPlayerDied", 3);
             //USING INVOKE FUNTION FOR 3 SEC DELAY   
             //Not using LoadScene as Restart Level cannot be shown on text
             //Restarting Level using transform
             // transform.position = playerStartPosition;
         }
     }
-    private void CallPlayerDied()
+    public void CallPlayerDied()
     {
         gameOverController.PlayerDied();
         this.enabled = false;
@@ -186,10 +194,12 @@ public class PlayerController : MonoBehaviour
     public void NoPlatform()
     {
         noOfLives = 1;
-        if(PlayerHeart1!=null)
-            Destroy(PlayerHeart1);
-        if (PlayerHeart2!=null)
-            Destroy(PlayerHeart2);
+        for (int i = PlayerHearts.Length-1; i >= 0; i--)
+        {
+            if(PlayerHearts[i].activeSelf)
+                PlayerHearts[i].SetActive(false);
+            Debug.Log(i);
+        }
     }
 
 }

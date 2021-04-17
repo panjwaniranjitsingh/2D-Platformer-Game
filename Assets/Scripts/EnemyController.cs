@@ -9,6 +9,7 @@ public class EnemyController : MonoBehaviour
     const string ISWALK = "isWalk";
     const string GROUND = "Ground";
     const string DIE = "Die";
+    const float ENEMY3BOUND1 = -20, ENEMY3BOUND2 = -4;
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -51,12 +52,12 @@ public class EnemyController : MonoBehaviour
         if (gameObject.name == ENEMY3)
         {
             Vector3 scale = transform.localScale;
-            if (position.x < -20)
+            if (position.x < ENEMY3BOUND1)
             {
                 speed = -speed;
                 scale.x = Mathf.Abs(scale.x);
             }
-            else if (position.x > -4)
+            else if (position.x > ENEMY3BOUND2)
             {
                 speed = -speed;
                 scale.x = -1f * Mathf.Abs(scale.x);
