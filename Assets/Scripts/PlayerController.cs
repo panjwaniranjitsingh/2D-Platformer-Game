@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
     public void KeyPicked()
     {
         //Player Pcked the key increase score
-        Debug.Log("Reached KeyPicked function");
+        //Debug.Log("Reached KeyPicked function");
         scoreController.IncreaseScore(SCORE_ADD);
     }
 
@@ -87,6 +87,7 @@ public class PlayerController : MonoBehaviour
         Vector3 position = transform.position;
         position.x += horizontal * speed * Time.deltaTime;
         transform.position = position;
+        
     }
 
     private void PlayerCrouch()
@@ -191,6 +192,11 @@ public class PlayerController : MonoBehaviour
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    public void PlayerMoveSound()
+    {
+        SoundManager.Instance.Play(Sounds.PlayerMove);
+    }
+
     public void NoPlatform()
     {
         noOfLives = 1;
@@ -198,7 +204,6 @@ public class PlayerController : MonoBehaviour
         {
             if(PlayerHearts[i].activeSelf)
                 PlayerHearts[i].SetActive(false);
-            Debug.Log(i);
         }
     }
 

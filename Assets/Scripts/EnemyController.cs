@@ -28,7 +28,7 @@ public class EnemyController : MonoBehaviour
         if (collision.gameObject.GetComponent<PlayerController>() != null)
         {
             //Player Dies so Restart Level
-            Debug.Log("Player Die due to enemy contact");
+            //Debug.Log("Player Die due to enemy contact");
             PlayerController playerController = collision.gameObject.GetComponent<PlayerController>();
             playerController.PlayerDie();
         }

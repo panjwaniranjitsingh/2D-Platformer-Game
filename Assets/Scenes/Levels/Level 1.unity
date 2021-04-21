@@ -2488,8 +2488,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278585080
-  m_fontColor: {r: 0.9716981, g: 0.022917405, b: 0.022917405, a: 1}
+    rgba: 4290445056
+  m_fontColor: {r: 0, g: 1, b: 0.7300215, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2832,22 +2832,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1887348306}
     - target: {fileID: 776936290, guid: d536eee40a820cd44ab754bb31a97ef3, type: 3}
-      propertyPath: noOfLives
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 776936290, guid: d536eee40a820cd44ab754bb31a97ef3, type: 3}
-      propertyPath: PlayerHeart1
-      value: 
-      objectReference: {fileID: 1138959581}
-    - target: {fileID: 776936290, guid: d536eee40a820cd44ab754bb31a97ef3, type: 3}
-      propertyPath: PlayerHeart2
-      value: 
-      objectReference: {fileID: 1181079624}
-    - target: {fileID: 776936290, guid: d536eee40a820cd44ab754bb31a97ef3, type: 3}
-      propertyPath: PlayerHeart3
-      value: 
-      objectReference: {fileID: 1768659522}
-    - target: {fileID: 776936290, guid: d536eee40a820cd44ab754bb31a97ef3, type: 3}
       propertyPath: scoreController
       value: 
       objectReference: {fileID: 597531448}
@@ -2855,10 +2839,6 @@ PrefabInstance:
       propertyPath: gameOverController
       value: 
       objectReference: {fileID: 673444404}
-    - target: {fileID: 776936290, guid: d536eee40a820cd44ab754bb31a97ef3, type: 3}
-      propertyPath: PlayerHearts.Array.size
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 776936290, guid: d536eee40a820cd44ab754bb31a97ef3, type: 3}
       propertyPath: PlayerHearts.Array.data[0]
       value: 
