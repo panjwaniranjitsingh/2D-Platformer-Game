@@ -103,4 +103,5 @@ public enum Sounds
     EnemyDeath,
     FinishLevel,
     NewLevel,
+    Collectible,
 }

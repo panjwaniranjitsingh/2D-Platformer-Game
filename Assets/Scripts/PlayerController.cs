@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour
         //Player Pcked the key increase score
         //Debug.Log("Reached KeyPicked function");
         scoreController.IncreaseScore(SCORE_ADD);
+        SoundManager.Instance.Play(Sounds.Collectible);
     }
 
     private void Awake()
@@ -151,10 +152,14 @@ public class PlayerController : MonoBehaviour
             return;
         // Debug.Log(SceneManager.GetActiveScene().buildIndex);
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        if (currentSceneIndex < SceneManager.sceneCountInBuildSettings-1)
-            SceneManager.LoadScene(currentSceneIndex+1);
+        if (currentSceneIndex < SceneManager.sceneCountInBuildSettings - 1)
+            SceneManager.LoadScene(currentSceneIndex + 1);
         else if (currentSceneIndex == SceneManager.sceneCountInBuildSettings - 1)
-            SceneManager.LoadScene(1);
+        {
+            SceneManager.LoadScene(0);
+            PlayerPrefs.DeleteAll();
+            LevelManager.Instance.UnlockingLobbyNFirstLevel();
+        }
         SoundManager.Instance.Play(Sounds.FinishLevel);
     }
 

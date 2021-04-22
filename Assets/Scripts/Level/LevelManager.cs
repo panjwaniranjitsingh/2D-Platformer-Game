@@ -26,8 +26,17 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
+
+        UnlockingLobbyNFirstLevel();
+        //Locking other levels
+        //for(int i=2;i<Levels.Length;i++)
+        //    SetLevelStatus(Levels[i], LevelStatus.Locked);
+    }
+
+    public void UnlockingLobbyNFirstLevel()
+    {
         //Unlocking Lobby
-        if(GetLevelStatus(Levels[0])== LevelStatus.Locked)
+        if (GetLevelStatus(Levels[0]) == LevelStatus.Locked)
         {
             SetLevelStatus(Levels[0], LevelStatus.Unlocked);
         }
@@ -36,10 +45,6 @@ public class LevelManager : MonoBehaviour
         {
             SetLevelStatus(Levels[1], LevelStatus.Unlocked);
         }
-
-        //Locking other levels
-        //for(int i=2;i<Levels.Length;i++)
-        //    SetLevelStatus(Levels[i], LevelStatus.Locked);
     }
 
     public void MarkCurrentLevelComplete()
