@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
     const string JUMP = "Jump";
     private bool m_playerAlive = true;
     public bool LevelCompleted = false;
+    [SerializeField] GameObject PlayerDiePS;
 
     public void KeyPicked()
     {
@@ -154,6 +155,7 @@ public class PlayerController : MonoBehaviour
             SceneManager.LoadScene(currentSceneIndex+1);
         else if (currentSceneIndex == SceneManager.sceneCountInBuildSettings - 1)
             SceneManager.LoadScene(1);
+        SoundManager.Instance.Play(Sounds.FinishLevel);
     }
 
     public void ShowLevelComplete()
@@ -162,6 +164,7 @@ public class PlayerController : MonoBehaviour
             return;
         //Bonus Feature
         LevelText.text = "New Level Complete";
+        SoundManager.Instance.Play(Sounds.NewLevel);
         this.enabled = false;
     }
 
@@ -195,6 +198,11 @@ public class PlayerController : MonoBehaviour
     public void PlayerMoveSound()
     {
         SoundManager.Instance.Play(Sounds.PlayerMove);
+    }
+
+    public void PlayerDieParticleEffect()
+    {
+        PlayerDiePS.SetActive(true);
     }
 
     public void NoPlatform()

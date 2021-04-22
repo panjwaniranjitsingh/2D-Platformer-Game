@@ -38,8 +38,8 @@ public class LevelManager : MonoBehaviour
         }
 
         //Locking other levels
-        for(int i=2;i<Levels.Length;i++)
-            SetLevelStatus(Levels[i], LevelStatus.Locked);
+        //for(int i=2;i<Levels.Length;i++)
+        //    SetLevelStatus(Levels[i], LevelStatus.Locked);
     }
 
     public void MarkCurrentLevelComplete()
@@ -55,7 +55,7 @@ public class LevelManager : MonoBehaviour
 
         int currentSceneIndex = Array.FindIndex(Levels, level => level == currentScene.name);
         int nextSceneIndex = currentSceneIndex + 1;
-        if(nextSceneIndex< Levels.Length)
+        if(nextSceneIndex < Levels.Length)
         {
             SetLevelStatus(Levels[nextSceneIndex], LevelStatus.Unlocked);
         }

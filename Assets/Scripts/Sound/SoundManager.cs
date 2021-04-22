@@ -101,4 +101,6 @@ public enum Sounds
     Music,
     PlayerDeath,
     EnemyDeath,
+    FinishLevel,
+    NewLevel,
 }
