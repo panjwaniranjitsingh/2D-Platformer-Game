@@ -131,7 +131,6 @@ GameObject:
   - component: {fileID: 1475593872693062172}
   - component: {fileID: 1475593872693062147}
   - component: {fileID: 1475593872693062146}
-  - component: {fileID: 4559815865763297015}
   m_Layer: 5
   m_Name: ButtonLobby
   m_TagString: Untagged
@@ -239,19 +238,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &4559815865763297015
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1475593872693062144}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8bf1831b250063f4097e180d5efdfc49, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LevelName: Lobby
 --- !u!1 &1475593873403972426
 GameObject:
   m_ObjectHideFlags: 0
@@ -587,7 +573,7 @@ GameObject:
   - component: {fileID: 1475593874112315422}
   - component: {fileID: 1475593874112315421}
   - component: {fileID: 1475593874112315420}
-  - component: {fileID: 1475593874112315395}
+  - component: {fileID: 2945431335312999707}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -778,7 +764,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &1475593874112315395
+--- !u!114 &2945431335312999707
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -790,4 +776,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bf1831b250063f4097e180d5efdfc49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LevelName: Lobby
+  m_LevelName: Lobby

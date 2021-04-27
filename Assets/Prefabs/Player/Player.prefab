@@ -254,9 +254,9 @@ MonoBehaviour:
   playerStartPosition: {x: 0, y: 0, z: 0}
   scoreController: {fileID: 0}
   gameOverController: {fileID: 0}
-  LevelText: {fileID: 0}
-  noOfLives: 0
-  PlayerHearts:
+  m_LevelText: {fileID: 0}
+  m_noOfLives: 3
+  m_PlayerHearts:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}

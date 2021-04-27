@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class GameOverController : MonoBehaviour
 {
-    public Button buttonRestart;
+    [SerializeField] Button buttonRestart;
 
     private void Awake()
     {
@@ -12,7 +12,7 @@ public class GameOverController : MonoBehaviour
     }
     public void PlayerDied()
     {
-        SoundManager.Instance.Play(Sounds.PlayerDeath);
+        SoundManager.Instance.Play(SoundsForEvents.PlayerDeath);
         gameObject.SetActive(true);
     }
 

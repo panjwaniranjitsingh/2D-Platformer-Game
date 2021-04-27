@@ -10,7 +10,7 @@ public class LevelManager : MonoBehaviour
     //public string Level1,Lobby;
 
     [SerializeField] string[] Levels;
-
+    public int score;
     private void Awake()
     {
         if(instance == null)
@@ -26,11 +26,7 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
-
         UnlockingLobbyNFirstLevel();
-        //Locking other levels
-        //for(int i=2;i<Levels.Length;i++)
-        //    SetLevelStatus(Levels[i], LevelStatus.Locked);
     }
 
     public void UnlockingLobbyNFirstLevel()

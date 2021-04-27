@@ -15,9 +15,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Vector3 playerStartPosition;
     [SerializeField] ScoreController scoreController;
     [SerializeField] GameOverController gameOverController;
-    [SerializeField] private TextMeshProUGUI LevelText;
-    [SerializeField] private int noOfLives;
-    [SerializeField] private GameObject[] PlayerHearts;
+    [SerializeField] private TextMeshProUGUI m_LevelText;
+    [SerializeField] private int m_noOfLives;
+    [SerializeField] private GameObject[] m_PlayerHearts;
     const int SCORE_ADD = 25;
     const int PLAYERLIVES = 3;
     const string HORIZONTAL = "Horizontal";
@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
         //Player Pcked the key increase score
         //Debug.Log("Reached KeyPicked function");
         scoreController.IncreaseScore(SCORE_ADD);
-        SoundManager.Instance.Play(Sounds.Collectible);
+        SoundManager.Instance.Play(SoundsForEvents.Collectible);
     }
 
     private void Awake()
@@ -47,8 +47,8 @@ public class PlayerController : MonoBehaviour
         initialXoffset = m_playerCollider.offset.x;
         initialXsize = m_playerCollider.size.x;
         playerStartPosition = transform.position;
-        LevelText.text = SceneManager.GetActiveScene().name;
-        noOfLives = PLAYERLIVES;
+        m_LevelText.text = SceneManager.GetActiveScene().name;
+        m_noOfLives = PLAYERLIVES;
     }
 
 
@@ -159,7 +159,7 @@ public class PlayerController : MonoBehaviour
             PlayerPrefs.DeleteAll();
             LevelManager.Instance.UnlockingLobbyNFirstLevel();
         }
-        SoundManager.Instance.Play(Sounds.FinishLevel);
+        SoundManager.Instance.Play(SoundsForEvents.FinishLevel);
     }
 
     public void ShowLevelComplete()
@@ -167,21 +167,23 @@ public class PlayerController : MonoBehaviour
         if (!LevelCompleted)
             return;
         //Bonus Feature
-        LevelText.text = "New Level Complete";
-        SoundManager.Instance.Play(Sounds.NewLevel);
+        m_LevelText.text = "New Level Complete";
+        SoundManager.Instance.Play(SoundsForEvents.NewLevel);
         this.enabled = false;
     }
 
     public void PlayerDie()
     {
-        noOfLives--;
-        if (noOfLives < PLAYERLIVES)
-            if (PlayerHearts[noOfLives].activeSelf)
-                PlayerHearts[noOfLives].SetActive(false); 
-        if (noOfLives == 0)
+        m_noOfLives--;
+        //Debug.Log("Player Lives ="+noOfLives);
+        if (m_noOfLives < PLAYERLIVES)
+            if (m_PlayerHearts[m_noOfLives].activeSelf)
+                m_PlayerHearts[m_noOfLives].SetActive(false); 
+        if (m_noOfLives == 0)
         {
             m_playerAlive = false;
             animator.SetBool("PlayerDies", true);
+
             // LevelText.text = "Level "+SceneManager.GetActiveScene().name + " Restarted";
 
             //Restarting Level using LoadScene
@@ -196,12 +198,13 @@ public class PlayerController : MonoBehaviour
     {
         gameOverController.PlayerDied();
         this.enabled = false;
+        scoreController.SetScore(0);
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void PlayerMoveSound()
     {
-        SoundManager.Instance.Play(Sounds.PlayerMove);
+        SoundManager.Instance.Play(SoundsForEvents.PlayerMove);
     }
 
     public void PlayerDieParticleEffect()
@@ -211,11 +214,11 @@ public class PlayerController : MonoBehaviour
 
     public void NoPlatform()
     {
-        noOfLives = 1;
-        for (int i = PlayerHearts.Length-1; i >= 0; i--)
+        m_noOfLives = 1;
+        for (int i = m_PlayerHearts.Length-1; i >= 0; i--)
         {
-            if(PlayerHearts[i].activeSelf)
-                PlayerHearts[i].SetActive(false);
+            if(m_PlayerHearts[i].activeSelf)
+                m_PlayerHearts[i].SetActive(false);
         }
     }
 

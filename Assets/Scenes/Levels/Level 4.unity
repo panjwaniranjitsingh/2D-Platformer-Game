@@ -2096,6 +2096,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1221131729}
     - target: {fileID: 776936290, guid: d536eee40a820cd44ab754bb31a97ef3, type: 3}
+      propertyPath: m_LevelText
+      value: 
+      objectReference: {fileID: 1221131729}
+    - target: {fileID: 776936290, guid: d536eee40a820cd44ab754bb31a97ef3, type: 3}
       propertyPath: PlayerHeart1
       value: 
       objectReference: {fileID: 1100401210}
@@ -2127,6 +2131,18 @@ PrefabInstance:
       propertyPath: PlayerHearts.Array.data[2]
       value: 
       objectReference: {fileID: 1100401210}
+    - target: {fileID: 776936290, guid: d536eee40a820cd44ab754bb31a97ef3, type: 3}
+      propertyPath: m_PlayerHearts.Array.data[0]
+      value: 
+      objectReference: {fileID: 1100401210}
+    - target: {fileID: 776936290, guid: d536eee40a820cd44ab754bb31a97ef3, type: 3}
+      propertyPath: m_PlayerHearts.Array.data[1]
+      value: 
+      objectReference: {fileID: 1077021033}
+    - target: {fileID: 776936290, guid: d536eee40a820cd44ab754bb31a97ef3, type: 3}
+      propertyPath: m_PlayerHearts.Array.data[2]
+      value: 
+      objectReference: {fileID: 674938811}
     - target: {fileID: 3824459060294287937, guid: d536eee40a820cd44ab754bb31a97ef3,
         type: 3}
       propertyPath: m_Name

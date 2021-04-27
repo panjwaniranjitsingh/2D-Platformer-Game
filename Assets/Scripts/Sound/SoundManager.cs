@@ -6,13 +6,12 @@ public class SoundManager : MonoBehaviour
     private static SoundManager instance;
     public static SoundManager Instance { get { return instance; } }
 
-    public AudioSource soundEffect;
-    public AudioSource soundMusic;
+    [SerializeField] private AudioSource m_soundEffect,m_soundMusic;
 
     public SoundType[] Sounds;
 
-    public bool IsMute = false;
-    public float Volume = 1f;
+    [SerializeField] private bool m_IsMute = false;
+    [SerializeField] private float m_Volume = 1f;
 
     private void Awake()
     {
@@ -30,30 +29,30 @@ public class SoundManager : MonoBehaviour
     private void Start()
     {
         SetVolume(0.5f);
-        PlayMusic(global::Sounds.Music);
+        PlayMusic(global::SoundsForEvents.Music);
     }
 
     public void Mute(bool status)
     {
-        IsMute = status;
+        m_IsMute = status;
     }
 
     public void SetVolume(float volume)
     {
-        Volume = volume;
-        soundEffect.volume = 2*Volume;
-        soundMusic.volume = Volume;
+        m_Volume = volume;
+        m_soundEffect.volume = 2*m_Volume;
+        m_soundMusic.volume = m_Volume;
     }
 
-    public void PlayMusic(Sounds sound)
+    public void PlayMusic(SoundsForEvents sound)
     {
-        if (IsMute)
+        if (m_IsMute)
             return;
         AudioClip clip = getSoundClip(sound);
         if (clip != null)
         {
-            soundMusic.clip = clip;
-            soundMusic.Play();
+            m_soundMusic.clip = clip;
+            m_soundMusic.Play();
         }
         else
         {
@@ -61,14 +60,14 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    public void Play(Sounds sound)
+    public void Play(SoundsForEvents sound)
     {
-        if (IsMute)
+        if (m_IsMute)
             return;
         AudioClip clip = getSoundClip(sound);
         if(clip != null)
         {
-            soundEffect.PlayOneShot(clip);
+            m_soundEffect.PlayOneShot(clip);
         }
         else
         {
@@ -76,7 +75,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    private AudioClip getSoundClip(Sounds sound)
+    private AudioClip getSoundClip(SoundsForEvents sound)
     {
         SoundType item = Array.Find(Sounds, i => i.soundType == sound);
         if (item != null)
@@ -88,11 +87,11 @@ public class SoundManager : MonoBehaviour
 [Serializable]
 public class SoundType
 {
-    public Sounds soundType;
+    public SoundsForEvents soundType;
     public AudioClip soundClip;
 }
 
-public enum Sounds
+public enum SoundsForEvents
 {
     ButtonClick,
     PlayerMove,

@@ -3,8 +3,8 @@ using UnityEngine.UI;
 
 public class LobbyController : MonoBehaviour
 {
-    public Button buttonPlay;
-    public GameObject LevelSelection;
+    [SerializeField] Button buttonPlay;
+    [SerializeField] GameObject LevelSelection;
 
     private void Awake()
     {
@@ -13,7 +13,7 @@ public class LobbyController : MonoBehaviour
 
     private void PlayGame()
     {
-        SoundManager.Instance.Play(Sounds.ButtonClick);
+        SoundManager.Instance.Play(SoundsForEvents.ButtonClick);
         //SceneManager.LoadScene(1);
         LevelSelection.SetActive(true);
     }
